@@ -1,0 +1,79 @@
+Recommender Systems @LinkedIn
+ 
+For a member we have :-
+Positions, Education, Summary, Specialty, Experience and skills of the user from the profile itself.  -Our Data
+Then, from member’s activity we have data about members connections, XX
+the groups that the member has joined, XX
+the company that the member follows amongst others. XX
+
+- [x]                                                                      Entity Resolution:-
+For Job Title
+In order to accurately match members to jobs, we need to understand that all the ways of listing these titles refer to the same entity ‘Software Engineer’
+‘Technical Yahoo’ is a Software Engineer at Yahoo
+‘Member Technical Staff’ is a Software Engineer at Oracle
+‘Software Development Engineer’ is a Software Engineer at Microsoft
+‘SDE’ is a Software Engineer at Amazon
+
+Solving this problem is itself a research topic broadly referred to as ‘Entity Resolution’. 
+
+example, How many variations do you think, we have for the company name ‘IBM’?
+In LinkedIn it was found that they had close to 8000+ user entered variations of the same company IBM.
+
+We need to apply machine learnt classifiers for the entity resolution using a host of features for company standardisation.
+In summary, data canonicalisation(multiple possible interpretations to one label/ standardisation ) is the key to accurate matching and is one of the most challenging aspects of our recommendation platform.
+
+- [x]                                                     Job recommendations based on ‘Similar Profiles’. 
+The motivation here is that if a hiring manager, we already know the kind of person that he wants to hire. He could be like person in his team already or like one of his connections on LinkedIn, then using that as the source profile, we suggest top Similar Profiles for hiring. Since, ‘people don’t reinvent themselves everyday’.  ‘People similar today are most likely similar today’. So, we can potentially do this computation completely offline with a more sophisticated model.
+So LinkedIn approached this issue as not a Real Time Recommendations problem.
+At aasaanjobs we will do this offline as well i.e. not real time but with good suggestions, focus is more on better results rather than faster results.
+
+Another interesting trade-off, is choosing between content analysis and collaborative filtering. 
+We would need to focus more on content analysis initially as we do not have the abundance of data as linkedin.
+So we start with content based and with increasing data we slowly give more importance to the collaborative one.
+
+Historically speaking: ‘job posting has been a post-and-prey’ model. Where job posters post a job and pray that hopefully someone will apply for the job.
+But we at LinkedIn, believe in ‘post-and-produce’ so we go ahead and produce matches to the job poster in real-time right after the job gets posted. When someone posts a job, the job poster naturally expects the candidates to have a strong match between job and the profile. Hence, this type of recommendation is heavy on content analysis.
+-we also anyways need to focus more on the content analysis part.
+
+On the other hand, we have a product called ‘Viewers of the profile also viewed ..’. When a member views more than 1 profile within a single session. We record it as a co-view. Then on aggregating these co-views for every member. We get the data for all profiles that get co-viewed, when someone visits any given profile. This is a classical collaborative filtering based recommendation much like Amazon’s ‘people who viewed this item also viewed’.
+Our user can also apply simultaneously	 for different profiles in that case we can also have something similar to the co-views.
+
+Most other recommendations are hybrid. For e.g. for ‘SimilarJobs’  jobs that have high content overlap with each other are similar. Interestingly, jobs that get applied to or viewed by the same members are also Similar. So, Similar Jobs is a nice mix of content and collaborative filtering.
+
+Last key trade-off is of precision vs recall.
+On our homepage, we suggest jobs that are good fit for our users with the motivation for them to be more aware of the possibilities out there. In some sense, we are pushing recommendations to you, as opposed to you actively looking for them.
+
+Even if a single job recommendation looks bad to the user either because of a  lower seniority of the job or because the recommendation is for the company that the user is not fond of, our users might feel less than pleased.
+Here, getting the absolute best 3 jobs even at the cost of aggressively filtering out a lot of jobs is acceptable.
+
+- [x]                                                       Similar profiles for the Hiring Managers
+On the other hand, We have another recommendation product called ‘Similar Profiles’ for hiring managers who are actively looking for candidates. Here, if one finds a candidate we suggest other candidates like the original one in terms of overall experience, specialty, education background and a host of other features.
+
+Since, the hiring manager is actively looking so in this case they are more open to getting a few bad ones as long as they get a lot of good ones too. So in essence, RECALL is more important here.
+
+Again, because of a platform approach and because we can re-use features, filters and code-base across verticals. So, tuning the knob of more precision vs more recall is mostly a matter of figuring out 
+1. how complicated the matching model should be and 
+2. how aggressively we want to apply filters for all recommendation verticals. Hence, our core message ‘Think Platform’. 
+
+- [x] Now, we will discuss in some detail how LinkedIn’s recommendations work.
+
+Lets see how we do recommendations by taking an example of ‘Similar Profiles’ that we just discussed. Given a member profile, the goal is to find other similar people for hiring. Lets try to find profiles similar to me.
+
+Here, we look at host of different features, such as
+1. User provided features like ‘Title, Specialty, Education, experience amongst others’
+2. Complex derived features like ‘Seniority’ and ‘Skills’, computed using machine learnt classifiers.
+3. Both these kinds of features help in precision, we also have features like ‘Related Titles’ and ‘Related Companies’ that help increase the recall.
+
+Intuitively, one might imagine that we use the following pair of features to compute Similar Profiles. In the next slide, we will discuss a more principled approach to figuring out pair of features to match against.
+Here in order to compute overall of similarity between me and Adil, we are first computing similarity between our specialties, our skills, our titles and other attribute.
+
+Now we somehow need to combine the similarity score in the vector to a single number sometimes profiles that have higher similarity score across more dimensions get ranked higher, as similar profiles for me.
+Moreover, the fact that our skills match might matter more for hiring than whether our education matches. Hence, there should be relative importance of one feature over the others.
+
+Once we get the topK recommendations, we also apply application specific filtering with the goal of leveraging domain knowledge
+For example, it could be the case that for a ‘Data Engineer role’ you as a hiring manager are looking for a candidate like one of your team member but who is local. Whereas, for all you know the ideal ‘Data Engineer most similar to the one you are looking for in terms of skills might be working somewhere in INDIA’ .
+
+To ensure our recommendation quality keeps improving as more and more people use our products, we use explicit and implicit user feedback combined with crowd-sourcing, to construct high quality training and test sets for constructing the ‘Importance weight vector’. Moreover, classifier with L1 regularisation helps prune out the weakly correlated features. We use this for figuring out which features to match profiles against.
+We just discussed an example. However, the same concepts apply to all the recommendation verticals.
+
+- [x] The signals we found useful while building our artificial intelligence and machine learning algorithms were career progression, experience, projects, publications, skillsets, company/college reputation, social contributions and many more. 
