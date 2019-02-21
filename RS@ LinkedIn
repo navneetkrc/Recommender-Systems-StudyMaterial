@@ -6,7 +6,7 @@ Then, from member’s activity we have data about members connections, XX
 the groups that the member has joined, XX
 the company that the member follows amongst others. XX
 
-- [x]                                                                      Entity Resolution:-
+                                          Entity Resolution:-
 For Job Title
 In order to accurately match members to jobs, we need to understand that all the ways of listing these titles refer to the same entity ‘Software Engineer’
 ‘Technical Yahoo’ is a Software Engineer at Yahoo
@@ -22,7 +22,7 @@ In LinkedIn it was found that they had close to 8000+ user entered variations of
 We need to apply machine learnt classifiers for the entity resolution using a host of features for company standardisation.
 In summary, data canonicalisation(multiple possible interpretations to one label/ standardisation ) is the key to accurate matching and is one of the most challenging aspects of our recommendation platform.
 
-- [x]                                                     Job recommendations based on ‘Similar Profiles’. 
+                         Job recommendations based on ‘Similar Profiles’. 
 The motivation here is that if a hiring manager, we already know the kind of person that he wants to hire. He could be like person in his team already or like one of his connections on LinkedIn, then using that as the source profile, we suggest top Similar Profiles for hiring. Since, ‘people don’t reinvent themselves everyday’.  ‘People similar today are most likely similar today’. So, we can potentially do this computation completely offline with a more sophisticated model.
 So LinkedIn approached this issue as not a Real Time Recommendations problem.
 At aasaanjobs we will do this offline as well i.e. not real time but with good suggestions, focus is more on better results rather than faster results.
@@ -46,7 +46,8 @@ On our homepage, we suggest jobs that are good fit for our users with the motiva
 Even if a single job recommendation looks bad to the user either because of a  lower seniority of the job or because the recommendation is for the company that the user is not fond of, our users might feel less than pleased.
 Here, getting the absolute best 3 jobs even at the cost of aggressively filtering out a lot of jobs is acceptable.
 
-- [x]                                                       Similar profiles for the Hiring Managers
+
+                           Similar profiles for the Hiring Managers
 On the other hand, We have another recommendation product called ‘Similar Profiles’ for hiring managers who are actively looking for candidates. Here, if one finds a candidate we suggest other candidates like the original one in terms of overall experience, specialty, education background and a host of other features.
 
 Since, the hiring manager is actively looking so in this case they are more open to getting a few bad ones as long as they get a lot of good ones too. So in essence, RECALL is more important here.
@@ -55,7 +56,7 @@ Again, because of a platform approach and because we can re-use features, filter
 1. how complicated the matching model should be and 
 2. how aggressively we want to apply filters for all recommendation verticals. Hence, our core message ‘Think Platform’. 
 
-- [x] Now, we will discuss in some detail how LinkedIn’s recommendations work.
+ Now, we will discuss in some detail how LinkedIn’s recommendations work.
 
 Lets see how we do recommendations by taking an example of ‘Similar Profiles’ that we just discussed. Given a member profile, the goal is to find other similar people for hiring. Lets try to find profiles similar to me.
 
@@ -74,6 +75,4 @@ Once we get the topK recommendations, we also apply application specific filteri
 For example, it could be the case that for a ‘Data Engineer role’ you as a hiring manager are looking for a candidate like one of your team member but who is local. Whereas, for all you know the ideal ‘Data Engineer most similar to the one you are looking for in terms of skills might be working somewhere in INDIA’ .
 
 To ensure our recommendation quality keeps improving as more and more people use our products, we use explicit and implicit user feedback combined with crowd-sourcing, to construct high quality training and test sets for constructing the ‘Importance weight vector’. Moreover, classifier with L1 regularisation helps prune out the weakly correlated features. We use this for figuring out which features to match profiles against.
-We just discussed an example. However, the same concepts apply to all the recommendation verticals.
-
-- [x] The signals we found useful while building our artificial intelligence and machine learning algorithms were career progression, experience, projects, publications, skillsets, company/college reputation, social contributions and many more. 
+We just discussed an example. However, the same concepts apply to all the recommendation verticals. The signals we found useful while building our artificial intelligence and machine learning algorithms were career progression, experience, projects, publications, skillsets, company/college reputation, social contributions and many more. 
