@@ -1,0 +1,58 @@
+Photon ML LinkedIn Personalised Recommendations
+
+https://www.kdnuggets.com/2017/10/linkedin-personalized-recommendations-photon-ml.html
+
+In this article we focus on the personalisation aspect of model building and explain the modelling principle as well as 
+how to implement Photon-ML so that it can scale to hundreds of millions of users.
+
+Introduction
+ Recommender systems are automated computer programs that match items to users in different contexts.
+ Such systems are ubiquitous and have become an integral part of our daily lives.
+ Examples include recommending products to users on a site like Amazon,
+ recommending content to users visiting a website like Yahoo!,
+ recommending movies to users on a site like Netflix,
+ recommending jobs to users on LinkedIn, and so on. 
+ Given the significant heterogeneity in user preferences, providing personalised recommendations is key to the success 
+ of such systems.
+
+To achieve this goal at scale, using machine learning models to estimate user preference from feedback data is essential.
+Such models are constructed using large amounts of high-frequency data obtained from past user interactions with items. 
+They are statistical in nature and involve challenges in areas like sequential decision processes,
+modeling interactions with very high-dimensional categorical data, and developing scalable statistical methods.
+New methodologies in this area require close collaboration among computer scientists, machine learners, statisticians,
+optimization experts, system experts, and, of course, domain experts. It is one of the most exciting applications of big data.
+Many products at LinkedIn are empowered by recommender systems.
+A core component of these systems is an easy-to-use and flexible machine learning library, 
+called Photon-ML, which is key to our productivity, agility, and developer happiness.
+We have open-sourced most of the algorithms used by Photon-ML.
+In this article we focus on the personalization aspect of model building and explain the modeling principle as well as 
+how to implement Photon-ML so that it can scale to hundreds of millions of users.  
+
+One of the most important products we offer is the Jobs Homepage,
+which serves as a central place for members with job-seeking intent to find good jobs to apply for. 
+Figure 1 is a snapshot of the LinkedIn Jobs Homepage. 
+One of the main modules on the page is “Jobs you may be interested in,” 
+where relevant job thumbnails are recommended to members based on their public profile data and past activities on the site. 
+If a member is interested in a recommended job, she can click on it to go to the job detail page,
+where the original job post is shown with information such as the job title, description, responsibilities,
+required skills and qualifications. The job detail page also has an “apply” button which allows the member to apply for the job
+with one click, either on LinkedIn or on the website of the company posting the job. One of the key success metrics of
+LinkedIn’s jobs business is the total number of job application clicks (i.e. the number of clicks on the “apply” button).
+
+The goal of our model is to accurately predict the probability that a member will click on the "apply" button of a recommended job.
+Intuitively, the model consists of three components (sub-models): 
+* A global model that captures the general behavior of how members apply for jobs,
+* A member-specific model with parameters (to be learned from data) specific to the given member to capture 
+  member's personal behavior that deviates from the general behavior, and
+* A job-specific model with parameters (to be learned from data) specific to the given job to capture 
+  the job's unique behavior that deviates from the general behavior.
+
+Like many recommender system applications, we observe a lot of heterogeneity in the amount of data per member or job.
+There are new members to the site (hence almost no data) as well as members who have strong job search intent and
+applied for many jobs in the past. 
+Similarly, for jobs, there are both popular and unpopular ones.
+For a member with many responses to different jobs in the past, we want to rely on the member-specific model.
+On the other hand, if the member does not have much past response data,
+we would like the member to fall back to the global model that captures the general behavior.
+
+
