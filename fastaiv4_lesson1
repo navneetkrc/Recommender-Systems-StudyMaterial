@@ -1,0 +1,394 @@
+# Lesson 1
+Webpage / [Video](https://youtu.be/_QUEXsHfsA0?t=1) / [Lesson Forum](https://forums.fast.ai/t/lesson-1-official-topic/65626) / [General Forum](https://forums.fast.ai/t/official-part-1-2020-updates-and-resources-thread/63376)
+
+## Welcome! [[0:00](https://youtu.be/_QUEXsHfsA0?t=1)]
+Hello everybody and welcome to **Deep Learning for Coders** lesson 1. This is the fourth year that we have done this but it's a very different and very special version for a number of reasons. The first reason it's different is because we are bringing it to you live from day number one of a nearly complete shutdown of San Francisco. We will be recording it over the next two months in the midst of this global pandemic. So if things seem a little crazy sometimes in this course I apologize but that's why this is happening.
+
+## Intro to fastai v2 [[0:42](https://youtu.be/_QUEXsHfsA0?t=42)]
+The other reason it's special is because we are trying to make this a definitive version. Since we have been doing this for a while now we have actually finally gotten to the point where we almost feel like we know what we are talking about. To the point that Sylvain and I have actually written a [book](https://www.amazon.com/Deep-Learning-Coders-fastai-PyTorch/dp/1492045527) and we have actually written a piece of software from scratch called the [fastaiv2](http://dev.fast.ai/), we have written a peer reviewed [paper](https://arxiv.org/abs/2002.04688) about this library. So this is designed to be the kind of version of the course that is hopefully gonna last a while. The syllabus is based very closely on this book. So if you want to read along properly as you go, please buy it. And I say please buy it because actually the whole thing is also available for free in the form of a jupyter notebook and that is thanks to the huge generosity of O’Reilly Media who have let us do that. You can access the complete book on this repo ([https://github.com/fastai/fastbook](https://github.com/fastai/fastbook)) where you can read the whole thing.
+
+**Request from Jeremy**: The deal is this, you can read this thing for free as jupyter notebooks but that is not as convenient as reading it on a kindle, or in a paper book or whatever. **So please don't turn this into a PDF**. Please don't turn it into a form designed more for reading because the whole point is that we hope that you buy it. Don't take advantage of O’Reilly's generosity by creating the thing you know they are not giving you for free. That is explicitly the license under which we are providing this as well. That is mainly a request being a descent human being. If you see somebody else not being a descent human being and stealing the book version of the book please tell them don't do that, it's not nice and don't be that person. You can read along with the syllabus in the book.
+
+[[3:28](https://youtu.be/_QUEXsHfsA0?t=208)]
+
+There's a couple of different versions of these notebooks. There's the [full notebook](https://github.com/fastai/fastbook/blob/master/01_intro.ipynb) that has the entire prose, pictures, everything. Now we actually wrote a system to turn notebooks into a printed book and sometimes that looks kinda weird. For example, here’s a weird looking table
+![](assets/dl1_2020/lesson1/01.png)
+and if you look in the actual book, it actually looks like a proper table. 
+![](assets/dl1_2020/lesson1/02.png)
+
+So sometimes you'll see little weird bits, they are not mistakes they are bits where we can add information to help out turn the book into a proper nice book, so just ignore them. Now when I say we, who is we? While I mentioned one important part of the we is Sylvain. Sylvain is my co-author of the book and fastai version 2 library, so he is my partner in crime here. The other key "we" here is Rachel Thomas, she is the co-founder of fastai and the founding director of the Center for Applied Data Ethics at the University of San Francisco. Rachel and Sylvain are also the people in this group who actually understand math. I am a mere philosophy graduate. Rachel has a PhD. Sylvain has written 10 books about math. So if math questions come along it's possible I may pass them along. But it is very nice to have an opportunity to work with people who understand this topic so well. We are gonna be talking about data ethics throughout the course because well we happen to think it's very important and so for those parts, although I'll generally be presenting them they will be on the whole based on Rachel’s work which she actually knows what she's talking about. Although thanks to her I kind of know a bit about what I am talking about too. 
+
+[[6:32](https://youtu.be/_QUEXsHfsA0?t=392)]
+
+![](assets/dl1_2020/lesson1/03.png)
+
+So should you be here? Is there any point you attempting to understand, understand deep learning? Is there any point you attempting to learn deep learning or are you too stupid or you don't have enough fast resources or whatever, because that's what a lot of people are telling us. They are saying you need teams of PhD's and massive data centres full of GPUs, otherwise it's pointless. Don’t worry that is not at all true, couldn't be further from the truth. In fact a lot of world class research and world-class industry projects have come out of fastai alumni and fastai library-based projects and elsewhere which are created on a single GPU using a few dozen or a few hundred data points from people that have no graduate level technical expertise or in my case I have no undergraduate level technical expertise, I am just a philosophy major. We will see throughout the course but there is lots of clear empirical evidence that you don't need lots of math, you don't need lots of data, you don't need lots of expensive computers to do great stuff with deep learning. So bear with us, you will be fine. To do this course you do need to code. Preferably you know how to code in Python but if you've done other languages you can learn Python. If the only languages you've done is something like Matlab, where you've used it more like a scripting kind of thing you might find it a bit heavier going. But that's okay stick with it, you can learn Python as you go.
+
+[[8:39](https://youtu.be/_QUEXsHfsA0?t=519)]
+
+![](assets/dl1_2020/lesson1/04.png)
+
+ Is there any point learning deep learning? Is it any good at stuff? If you are hoping to build a brain that is an AGI (Artificial General Intelligence) I cannot promise we can help you with that. But what I can tell you though is that in all of the above areas deep learning is the best known approach to at least many versions of these things. So it is not speculative at this point whether this is a useful tool. It's a useful tool in lots, and lots of places. Out of many of these cases it is equivalent to or better than human performance at least according to some particular narrow definition of things that humans do in these kinds of areas. So deep learning is pretty amazing and you can have a look through the above figure and try and pick some things out that might look interesting and type that keyword and deep learning into Google and you'll find lots of papers and examples and stuff like that. 
+ 
+ ## Neural networks: a brief history [[9:53](https://youtu.be/_QUEXsHfsA0?t=593)]
+
+![](assets/dl1_2020/lesson1/05.png)
+ 
+ Deep Learning comes from a background of neural networks. As you'll see deep learning is just a type of neural network learning, a deep one. We will describe exactly what that means later. Neural networks are certainly not a new thing. They go back at least in 1943 when McCulloch and Pitts created a mathematical model of an artificial neuron and got very excited about where that could get to. Then in the 50s Frank Rosenblatt built on top of that. He basically created some subtle changes to that mathematical model and he thought that with the subtle changes we could witness the birth of a machine that is capable of perceiving, recognizing and identifying its surroundings without any human training or control, and he oversaw the building of this extraordinary thing (the computer in right side of above figure), the Mark 1 Perceptron at Cornell. I think it was 1961. Thankfully, nowadays we don't have to build neural networks by running the damn wires going from artificial neuron to artificial neuron. But you can kinda see the idea of connections going on and you will hear the word connection a lot in this course because that's what it's all about.
+ 
+![](assets/dl1_2020/lesson1/06.png)
+
+Then we had the first AI winter as it was known which really to a strong degree happened because an MIT professor named Marvin Minsky and Seymour Papert wrote a book called 'Perceptrons' about Rosenblatt's invention in which they pointed out that a single layer of these artificial neuron devices couldn't learn some critical things. It was like impossible for them to learn something as simple as the boolean XOR operator. In the same book they showed that using multiple layers of the devices actually would fix the problem. People didn't notice that part of the book and only noticed the limitation and people basically decided that neural networks are gonna go nowhere and they kind of largely disappeared for decades. 
+
+![](assets/dl1_2020/lesson1/07.png)
+
+Until in some ways in 1986. A lot happened in the meantime but there was a big thing in 1986, which is that MIT released a series of two volumes of book called 'Parallel Distributed Processing (PDP)' in which they described this thing they call parallel distributed processing where you have a bunch of processing units that have some state of activation and some output function and some pattern of connectivity and some propagation rule and some activation rule and some learning rule operating in an environment and then they described how things that met these requirements could in theory do all kinds of amazing work. And this was the result of many, many researchers working together as a whole group involved in this project which resulted in this very very important book. The interesting thing here to me is that as you go through this course come back and have a look at this picture and you'll see we are doing exactly these things, everything we are learning about really is how do you do each of these eight things. That is interesting that they include the environment because that is something which very often data scientist ignore which is you build a model you've trained, it learns something but what is the context it works in and we're talking about that quite a bit over the next couple of lessons as well.
+
+![](assets/dl1_2020/lesson1/08.png)
+
+So in the 80s during and after this was released people started building in this second layer of neurons avoiding Minsky's problem and in fact it was shown that it was mathematically provable that by adding that one extra layer of neurons it was enough to allow any mathematical model to be approximated to any level of accuracy with these neural networks and so that was like the exact opposite of the Minsky think. 
+
+That was like hey you know there's nothing provably that we can't do and so that was kind of when I started getting involved in neural networks. So I was a little bit later I guess because I was getting involved in the early 90s and they were very widely used in industry, I was using them for very boring things like targeted marketing for retail banks tailored to big companies with lots of money that we are using them and it certainly though was true that often the networks were too big or slow to be useful but they were certainly useful for some things but they never felt to me like they were living up to the promise for some reason. Now what I didn't knew and nobody I personally met knew, was that actually there were researchers that showed 30 years ago that to get practical good performance you need more layers of neurons, even though mathematically, theoretically you can get as accurate as you want with just one extra layer, to do it with good performance you need more layers. 
+
+So when you add more layers to a neural network you get deep but deep doesn't mean anything mystical. It just means more layers, more layers than just adding the one extra one. So thanks to that neural nets are now living up to their potential. So we could now say that Rosenblatt was right. We have a machine that is capable of perceiving, recognising and identifying its surroundings without any human training or control. That is definitely true and I don't think there is anything controversial about that statement based on the current technology.
+
+## fastai way of teaching things [[16:00](https://youtu.be/_QUEXsHfsA0?t=960)]
+
+![](assets/dl1_2020/lesson1/09.png)
+
+We are gonna be learning how to do that. We are gonna be learning how to do that in exactly the opposite way of probably all of the other maths and technical education you've had. We are not gonna start with a two-hour lesson about the sigmoid function or a study of linear algebra or a refresher course on calculus, and the reason for that is that people who study how to teach and learn have found that it is not the right way to do it for most people. So we work a lot based on the work of Professor David Perkins from Harvard and others who work at similar things to talk about this idea of playing the whole game and this idea of playing whole game can be based on a sports analogy. So if you are gonna teach somebody baseball, you don't take them out into a classroom and start teaching them about the physics of a parabola and how to stitch a ball and a three-part history of 100 years of baseball politics and then 10 years later you let them watch a game and then 20 years later you let them play a game, which is kind of like how math education is being done. Instead with baseball step one is to say, hey, let's go and watch some baseball. What you think that was fun right, you see that guy there, he's trying to run there before the other guy throws the ball over there. Hey you wanna try having a hit. Ok so you are gonna hit the ball and then I have to try to catch it and then have to run over there and so from step one you are playing the whole game.
+
+Just to add to that, when people start they often may not have a full team or be playing a full nine innings. But they still have a sense of what the game is, kind of a big picture idea. There's lots and lots of reasons this helps most human beings, not everybody. There's a small percentage of people who like to build things up from the foundations and the principles and not surprisingly they are massively overrepresented in a university setting because the people who get to be academics are the people who thrive with to me the upside down way of how things are taught. But outside of universities most people learn best in this top-down approach where you start with the full context. So step-up number two in the seven principles and I am gonna only mention the first three is to make the game worth playing, which is like if you're playing baseball like you have a competition. You score, you actually try and win, you bring together teams from around the community and have people try to beat each other and you have leaderboards of who got the highest number of runs or whatever. So this is all about making sure the thing you are doing, you are doing properly. You are making it the whole thing, you're providing the context and interest. So for the fastai approach to learning deep learning what this means is that today we are gonna train models end-to-end. We are gonna actually train models and they won't just be crappy models, they will be state-of-the-art world-class models from today and we are gonna try to have you build your own state-of-the-art world-class models from either today or next lesson depending on how things go.
+
+Then number three in the seven principles from Harvard is that, work on the hard parts which is kind of like this idea of deliberate practice. Work on the hard parts means that you don't just swing a bat, ball every time you go out, or you just muck around. You train properly, you find the bit that you are the least good, you figure out where the problems are, you work damn hard at it. So in the deep learning context that means that we do not dumb things down. By the end of the course, you will have done the calculus, you will have done the linear algebra, you will have done the software engineering of the code. You will be practising these things which are hard so it requires tenacity and commitment but hopefully you'll understand why it matters because before you start practising something you'll know why you need that thing because you'll be using it to make your model better and you'll have to understand that concept first. So for those of you used to a traditional university environment this is gonna feel pretty wierd and a lot of people say that they regret that after a year of starting fastai they spent too much time studying theory and not enough time training models and writing code. That's the number one piece of feedback we get, wish I had done things differently. So please try to as best as you can, since you're here follow along with this approach.
+
+Also, since so many of us spent so many years kind of with the traditional educational approach of bottom-up that this can feel very uncomfortable at first. Rachel still feels uncomfortable with it sometimes, even though she is committed to the idea and some of it is also kind of having to catch yourself and be ok with not knowing the details, which can feel very unfamiliar or even wrong when you are kind of new to that. But you have to trust that we are going to get to those details later.
+
+## Software stack we will be using [[23:07](https://youtu.be/_QUEXsHfsA0?t=1387)]
+
+![](assets/dl1_2020/lesson1/10.png)
+
+One of the things that helps us here is the software we have available. If you haven't used Python for it's ridiculously flexible and expressive and easy to use language, we have plenty of bits about it that we don't love but on the whole we love the overall thing. But most importantly, the vast majority of deep learning practitioners and researchers are using python. On top of python there are two libraries that most folks are using today: pytorch and tensorflow. There's been a very rapid change here, tensorflow was what we were teaching until a couple of years ago, it's what everyone was using until a couple of years ago. Tensorflow got super bugged out and this other software called pytorch came along which was much easier to use and much more useful to researchers and within the last twelve months the percentage of papers at major conferences that use PyTorch have gone from 20% to 80% and the usage of tensorflow has decreased from 80% to 20%. So basically all the folks that have been building the technology were all using tensorflow and now using PyTorch. Industry moves a bit more slowly but in the next year or two you wil probably see a similar thing in the industry. 
+
+Now the thing about PyTorch is that it is super super flexible and really is designed for flexibility and developer friendliness, certainly not designed for beginner friendliness and it does not have higher level API's, by which I mean there isn't things to make it easy to build stuff quickly using PyTorch. So to deal with that issue we have a library called fastai that sits on top of PyTorch. fastai is the most popular higher level API for PyTorch. Because our courses are so popular some people are under the mistake and impression that fastai is designed for beginners or for teaching. It is designed for beginners and teaching as well as practitioners in industry and researchers. The way we do this i.e. make sure it is the best API for all of those people is we use something called 'A Layered API'. So there’s a peer-reviewed [paper](https://arxiv.org/abs/2002.04688) that Sylvain and I wrote that described how we did that and for those of you that are software engineers it will not be at all unusual or surprising. It's just totally standard software engineering practices, but they are practices that were not followed in any deep learning library we had seen. Just basically lots of re-factoring and decoupling and so by using that approach, it's allowed us to build something which you can do super low-level research, you can do state-of-the-art production models and you can do kind of super easy, beginner, but beginner world-class models. So that’s the basic software stack, there’s other pieces of software we will be learning about along the way. But the main thing I think to mention here is it actually doesn't matter. If you learn this software stack and then at work you need to use TensorFlow and Keras say, you will be able to switch in less than a week. Lots and lots of students have done that, it’s never been a problem. The important thing is to learn the concepts and so we’re going to focus on those concepts and by using an API which minimizes the amount of boilerplate you have to use, it means you can focus on the bits that are important. The actual lines of code will correspond much more to the actual concepts you are implementing. 
+
+![](assets/dl1_2020/lesson1/11.png)
+
+You are going to need a GPU machine. A GPU is a Graphics Processing Unit, and specifically, you need an Nvidia GPU. Other brands of GPU just aren't well supported by any Deep Learning libraries. Please don’t buy one. If you already have one you probably shouldn’t use it. Instead you should use one of the platforms that we have already got set up for you. It's just a huge distraction to be spending your time doing system administration on a GPU machine and installing drivers and blah blah blah. And run it on Linux, please. That's what everybody's doing, not just us, everybody's running it on Linux. Make life easy for yourself. It's hard enough to learn deep learning without having to do it in a way that you are learning, you know, all kinds of arcane hardware support issues. 
+
+There's a lot of free options available and so, please, please use them. If you're using an option that is not free don't forget to shut down your instance. So what’s gonna be happening is you gonna be spinning up a server that lives somewhere else in the world, and you’re gonna be connecting to it from your computer and training and running and building models. Just because you close your browser window doesn't mean your server stops running on the whole. So don't forget to shut it down because otherwise you're paying for it. [Colab](https://colab.research.google.com/) is a great system which is free. There’s also a paid subscription version of it. Be careful with Colab. Most of the other systems we recommend save your work for you automatically and you can come back to it at any time. Colab doesn't. So be sure to check out the Colab platform [thread](https://forums.fast.ai/t/platform-colab-free-10-month-pro/65525) on the forums, to learn about that. 
+
+So, I mention the forums. The [forums](https://forums.fast.ai/c/part1-v4) are really, really important because that is where all of the discussion and set up and everything happens. So for example if you want help with setup here, you know there is a setup help thread and you can find out, you know, how to best set up Colab, and you can see discussions about it and you can ask questions, and please remember to search before you ask your question. Because it's probably been asked before, unless you're one of the very, very earliest people who are doing the course. 
+
+So step one is to get your server set up by just following the instructions from the [forums](https://forums.fast.ai/t/setup-help/65529) or from the [course website]. And the course website will have lots of step-by-step instructions for each platform. They will vary in price, they will vary in speed, they will vary in availability, and so forth. Once you are finished following those instructions the last step of those instructions will end up showing you something like this:
+
+![](assets/dl1_2020/lesson1/12.png)
+
+A course-v4 folder. So a version four of our course. By the time you see this video, this is likely to have more stuff in it, but it will have an `nbs` folder standing for notebooks folder. So you can click on that, and that will show you all of the notebooks for the course. What I want you to do is scroll to bottom and find the one called `app_jupyter.ipynb` and click on that and this is where you can start learning about Jupyter notebook.
+
+## Jupyter notebook 101 [[31:26](https://youtu.be/_QUEXsHfsA0?t=1886)]
+
+[app_jupyter.ipynb](https://github.com/fastai/course-v4/blob/master/nbs/app_jupyter.ipynb)
+
+Some shortcuts:
+- <kbd>Shift</kbd>+<kbd>Enter</kbd>: Runs the code or markdown in a cell
+- <kbd>Up Arrow</kbd>+<kbd>Down Arrow</kbd>: Toggle across cells
+- <kbd>b</kbd>: Create new cell (below current cell)
+- <kbd>a</kbd>: Create new cell (above current cell)
+- <kbd>0</kbd>+<kbd>0</kbd>: Restart Kernel
+
+What’s Jupyter Notebook? Jupyter Notebook is something where you can start typing things, and press <kbd>Shift</kbd>+<kbd>Enter</kbd>, and it will give you an answer. 
+
+![](assets/dl1_2020/lesson1/13.png)
+
+And so the thing you're typing is python code (1+2), and the thing that comes out (3) is a result of that code. You can put anything in python and it displays a result anytime there’s a result to display. 
+
+![](assets/dl1_2020/lesson1/14.png)
+
+So for those of you that have done a bit of coding before, you will recognise this as a REPL (Read, Evaluate, Print, Loop). Most languages have some kind of REPL. The Jupyter notebook REPL is particularly interesting because it has things like headings, graphical outputs, interactive multimedia. It's a really astonishing piece of software. It's won some really big awards. I would consider it the most widely used REPL outside of shells like bash. It’s a very powerful system. We love it. We’ve written our whole book in it, we’ve written the entire fastai library with it, we do all our teaching with it. It’s extremely unfamiliar to people who have done most of their work in IDE. You should expect it to feel as awkward as perhaps the first time you moved from a GUI to a command line. It’s different. So if you’re not familiar with REPL-based systems, it’s gonna feel super weird. But stick with it, because it really is great. 
+
+The kind of model going on here is that, this webpage I'm looking at is letting me type in things for a server to do and show me the results of computations a server is doing. So the server is off somewhere else. It’s not running on my computer. The only thing running on the computer is this webpage. But as I do things, so for example if I say `x=x*3`. This is updating the server's state. There's this state. It’s like what's currently the value of `x` and now `x` is something different. 
+
+![](assets/dl1_2020/lesson1/15.png)
+
+So you can see, when I did this line here, it didn't change the earlier `x+1`. That means that when you look at a jupyter notebook, it's not showing you the current state of your server. It's just showing you what that state was at the time that you printed that thing out. It’s just like if you use a shell like bash and you type `ls` and then you delete a file. That earlier `ls` you printed doesn't go back and change. That's kind of how REPL's generally work. Including this one. 
+
+Jupyter notebook has two modes. 
+1. **Edit mode**: Which is when I click on a cell and I get a flashing cursor and I can move left and right and type. There’s not very many keyboard shortcuts to this mode.
+    - <kbd>Ctrl</kbd>+<kbd>/</kbd>: Comment and uncomment current line
+    - <kbd>Shift</kbd>+<kbd>Enter</kbd>: Run the cell
+2. **Command mode**: At any point when there is no flashing cursor anymore, that means that I'm now in command mode. So as I go up and down, I'm selecting different cells. So in command mode as we move around, we’re now selecting cells. And there are now lots of keyboard shortcuts you can use. 
+    - <kbd>h</kbd>: display a list of all shortcuts
+    - <kbd>c</kbd>: copy current cell
+    - <kbd>v</kbd>: past copied cell
+    - <kbd>x</kbd>: cut current cell
+    - <kbd>a</kbd>: add a new cell above
+    - <kbd>b</kbd>: add a new cell below
+    - <kbd>1</kbd> to <kbd>6</kbd>: Create headings in markdown of given size
+
+**Note**: If you haven’t used Markdown before, it's a super super useful way to write formatted text. That is used very, very widely. So learn it because it’s super handy. And you need it for jupyter. To learn about markdown use this [link](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
+
+So when you look at our book notebooks. For example, you can see an example of all the kinds of formatting and code and stuff here. So you should go ahead and go through the `app_jupyter.ipynb`. And you can see here how you can create plots for example. 
+
+![](assets/dl1_2020/lesson1/16.png)
+
+And create lists of things. And import libraries. And display pictures and so forth. 
+
+![](assets/dl1_2020/lesson1/17.png)
+
+If you wanna create a new notebook, you can just go “New” “Python 3” and that creates a new notebook which by default is just called “Untitled” so you can then rename it to give it whatever name you like. 
+
+![](assets/dl1_2020/lesson1/18.png)
+
+The other thing to know about jupyter is that it's a nice easy way to jump into a terminal if you know how to use a terminal. You certainly don't have to for this course at least for the first bit.
+
+![](assets/dl1_2020/lesson1/19.png)
+ 
+One thing to note is that the notebooks are attached to a Github repository. If you haven't used Github before that's fine. but basically they're attached to a server where from time to time we will update the notebooks on it and you will see you'll see on the course website, in the forum we tell you how to make sure you have the most recent versions. When you grab our most recent version you don't want to conflict with or overwrite your changes. So as you start experimenting it’s not a bad idea to like select a notebook and click duplicate and then start doing your work in the copy. And that way when you get an update of our latest course materials, it's not gonna interfere with the experiments you’ve been running.
+ 
+So there are two important repositories to know about. One is the [fastbook](https://github.com/fastai/fastbook) repository which we saw earlier, which is kind of the full book with all the outputs and prose and everything. And then the other one is the course V4 repository. And here is the exact same notebook from the [course-v4](https://github.com/fastai/course-v4) repository. And for this one we remove all of the prose and all of the pictures and all of the outputs and just leave behind the headings and the code. This is properly the version that you want to be experimenting with. Because it kind of forces you to think about like what's going on as you do each step, rather than just reading it and running it without thinking. We kind of want you to do it in a small bare environment in which you thinking about like what did the book say, why was this happening and if you forget anything then you kind of go back to the book.
+ 
+The other thing to mention is both the course-v4 version and the fastbook version at the end have a questionnaire. And a quite a few folks have told us you know that in amongst the reviewers and stuff that they actually read the questionnaire first. We spent many, many weeks writing the questionnaires, Sylvain and I. And the reason for that is because we try to think about like what do we want you to take away from each notebook. So you kind of read the questionnaire first you can find out what are the things we think are important. What are the things you should know before you move on. So rather than having like a summary section at the end saying at the end of this you should know, blah blah blah, we instead have a questionnaire to do the same thing, **so please make sure you do the questionnaire before you move onto the next chapter**. You don’t have to get everything right, and most of the time answering the questions is as simple as going back to that part of the notebook and reading the prose, but if you've missed something, like do go back and read it because these are the things we are assuming you know. So if you don't know these things before you move on, it could get frustrating. Having said that, if you get stuck after trying a couple of times, do move onto the next chapter, do two or three more chapters and then come back, maybe by the time you've done a couple more chapters, you know, you will get some more perspective. We try to re-explain things multiple times in different ways, so it's okay if you tried and you get stuck, then you can try moving on. 
+
+## Chapter-1 Intro [[42:17](https://youtu.be/_QUEXsHfsA0?t=2537)]
+
+[01_intro.ipynb](https://github.com/fastai/course-v4/blob/master/nbs/01_intro.ipynb)
+
+![](assets/dl1_2020/lesson1/20.png)
+
+## Train model on pets dataset
+In `01_intro.ipynb` I click on the first cell and by default there will be a header in the toolbar as you can see. You can turn them on or off. I always leave them off myself and so to run this cell, you can either click on the run button or as I mentioned, you can hit <kbd>Shift</kbd>+<kbd>Enter</kbd>. So for this one this i’ll just click and as you can see this star appears, so this says I’m running and now you can see this progress bar popping up and that is going to take a few seconds and so as it runs to print out some results. Don't expect to get exactly the same results as us, there is some randomness involved in training a model, and that's okay. Don't expect to get exactly the same time as us. If this first cell takes more than five minutes unless you have a really old GPU that is probably a bad sign. You might want to hop on the forums and figure out what's going wrong or maybe you are on Windows which really doesn't work very well for this moment. Don't worry that we don't know what all the code does yet. We are just making sure that we can train a model. 
+
+So here we are, it's finished running and so as you can see, it's printed out some information and in this case it’s showing me that there is an error rate of 0.005 at doing something. What is the something that it's doing? Well, what it's doing here is it's actually grabbing a dataset, we call the pets dataset, which is a dataset of pictures of cats and dogs. And it’s trying to figure out; which ones are cats and which ones are dogs. And as you can see, after about well less than a minute, it's able to do that with a 0.5% error rate. So it can do it pretty much perfectly. So we’ve trained our first model. We have no idea how. We don't know what we were doing. But we have indeed trained our model. So that's a good start. And as you can see, we can train models pretty quickly on a single computer which many of us can get for free. One more thing to mention is it doesn’t matter whether you have Windows or Mac or Linux in terms of what's running in the browser. But if you have a Mac, please don't try to use that GPU. Apple doesn't even support Nvidia GPUs anymore. So that's really not gonna be a great option. So stick with Linux. It will make life much easier for you. 
+
+## Doing inference on user image [[45:25](https://youtu.be/_QUEXsHfsA0?t=2725)]
+
+I claim we’ve trained a model that can pick cats from dogs. Let's make sure we can. Run this cell. 
+
+![](assets/dl1_2020/lesson1/21.png)
+
+We’ve created a widgets dot file upload object and displayed it. And this is actually showing us a clickable button. So as I mentioned this is an unusual REPL, we can even create GUIs in this REPL. So if I click on this file upload and I can pick 'cat' and I can now turn that uploaded data into an image using.
+
+![](assets/dl1_2020/lesson1/22.png)
+
+There’s a cat. And now I can do predict. 
+
+![](assets/dl1_2020/lesson1/23.png)
+
+And it's a cat with a 99.96% probability. So we can see we have just uploaded an image that we’ve picked out. So you should try this. Right? Grab a picture of a cat. Find one from the Internet or go and take a picture of one yourself and make sure that you get a picture of a cat. 
+
+This is something which can recognise photos of cats, not line drawings of cats. And so as we’ll see, in this course these kinds of models can only learn from the kinds of information you give it. And so far we've only given it, as you'll discover, photos of cats. Not anime cats, not drawn cats, not abstract representations of cats but just photos. So we’re now gonna look at; what's actually happened here? 
+
+![](assets/dl1_2020/lesson1/24.png)
+
+**Note**: If you see this something like above in your notebooks, you’ll have to go: `File -> Trust Notebook`. And that just tells jupyter that it’s allowed to run the code necessary to display things, to make sure there isn't any security problems, after which you'll be able to see the outputs. 
+
+**Note**: Sometimes you’ll see some weird code like this.
+```python
+gv('''program[shape=box3d width=1 height=0.7]
+inputs->program->results''')
+```
+This is code that actually creates outputs. Sometimes we hide that code, sometimes we show it. So generally speaking, you can just ignore the stuff like that and focus on what comes out. 
+
+## What is machine learning? [[47:59](https://youtu.be/_QUEXsHfsA0?t=2879)]
+
+![](assets/dl1_2020/lesson1/25.png)
+
+We're doing here machine learning. Deep learning is a kind of machine learning. What is machine learning? Machine learning is, just like regular programming, it's a way to get computers to do something. But in this case, it's pretty hard to understand how you would use regular programming to recognise dog photos from cat photos. How do you kind of create the loops and the variable assignments and the conditionals to create a program that recognizes dogs vs cats in photos. It's super hard. Super super hard. So hard, that until kind of the deep learning era, nobody really had a model that was remotely accurate at this apparently easy task. Because we can't write down the steps necessary. So normally, you know, we write down a function that takes some inputs and goes through our program and gives us some results. 
+
+![](assets/dl1_2020/lesson1/26.png)
+
+This general idea where the program is something that we write (the steps) doesn't seem to work great for things like recognizing pictures. So back in 1949, somebody named Arthur Samuel started trying to figure out a way to solve problems like recognizing pictures of cats and dogs. And in 1962, he described a way of doing this. Well first of all he described the problem: “Programming a computer for these kinds of computations is at best a difficult task. Because of the need to spell out every minute step of the process in exasperating detail. Computers are giant morons which all of us coders totally recognise.” 
+
+![](assets/dl1_2020/lesson1/27.png)
+
+So he said, okay, let's not tell the computer the exact steps, but let's give it examples of a problem to solve and figure out how to solve it itself. And so, by 1961 he had built a checkers program that had beaten the Connecticut state champion, not by telling it the steps to take to play checkers, but instead by doing this, which is: “arrange for an automatic means of testing the effectiveness of a weight assignment in terms of actual performance and a mechanism for altering the weight assignment so as to maximize performance.” This sentence is the key thing. And it's a pretty tricky sentence so you can spend some time on it. The basic idea is this; instead of saying inputs to a program and then outputs. Let’s have inputs to model and results (we are calling program 'model' now). And then we’re gonna have a second thing called weights. And so the basic idea is that this model is something that creates outputs based not only on, for example, the state of a checkers board, but also based on some set of weights or parameters that describe how that model is going to work. 
+
+So the idea is, if we could, like, enumerate all the possible ways of playing checkers, and then kind of describe each of those ways using some set of parameters or what Samuel called weights then if we had a way of checking how effective a current weight assignment is in terms of actual performance, in other words, does that particular enumeration of a strategy for playing checkers end up winning or losing games, and then a way to alter the weight assignment so as to maximize the performance. So then let's try increasing or decreasing each one of those weights one at a time to find out if there is a slightly better way of playing checkers and then do that lots of lots of times, then eventually such a procedure could be made entirely automatic and then the machine so programmed would learn from its experience so this little paragraph is, is the thing. This is machine learning a way of creating programs such that they learn, rather than programmed. 
+
+![](assets/dl1_2020/lesson1/28.png)
+
+So if we had such a thing, then we would basically now have something that looks like this: you have inputs and weights again going into a model, creating results, i.e. you won or you lost, and then a measurement of performance. So remember that was this key step and then the second key step is a way to update the weights based on the measured performance and then you could look through this process and create and train a machine learning model. This is the abstract idea. 
+
+![](assets/dl1_2020/lesson1/29.png)
+
+So after it ran for a while it's come up with a set of weights which is pretty good. We can now forget the way it was trained and we have something that is just like the original definition of program except the word program is now replaced with the word model. So a trained model can be used just like any other computer program. So the idea is we are building a computer program not by putting up the steps necessary to do the task, but by training it to learn to do the task at the end of which it’s just another program and this is what's called inference. It is using a trained model as a program to do a task such as playing checkers.
+
+**Definition**: Machine learning is the training of programs developed by allowing a computer to learn from its experience, rather than through manually coding the individual steps. 
+
+## Neural Networks [[53:44](https://youtu.be/_QUEXsHfsA0?t=3224)]
+
+![](assets/dl1_2020/lesson1/30.png)
+
+Ok how would you do this for image recognition, what is that model and that set of weights such that as we vary them it could get better and better at recognizing cats versus dogs, I mean for checkers it's not too hard to imagine how you could kind of enumerate, depending on different kinds of “how far away the opponent’s piece is from your piece,” what should you do in that situation. How should you weigh defensive versus aggressive strategies, blah blah blah. Not at all obvious how you do that for image recognition. So what we really want, is some function in here which is so flexible that there is a set of weights that could cause it to do anything. It's a neural network. So we’ll be describing exactly what that mathematical function is in the coming lessons. To use it, it actually doesn't really matter what the mathematical function is. It’s a function which is, we say, “parameterized” by some set of weights by which I mean, as I give it a different set of weights it does a different task, and it can actually do any possible task: something called the universal approximation theorem tells us that mathematically provably, this functional form can solve any problem that is solvable to any level of accuracy if you just find the right set of weights which is kind of restating what we described earlier in that, like, how do we deal with Minsky (the Marvin Minsky) problem.  
+
+![](assets/dl1_2020/lesson1/31.png)
+
+So neural networks are so flexible that if you could find the right set of weights they can solve any problem including “Is this a cat or is this dog.” So that means you need to focus your effort on the process of training that is finding good weights, good weight assignments to use Samuel's terminology. So how do you do that? We want a completely general way to do this--to update the weights based on some measure of performance, such as how good is it at recognizing cats versus dogs. And luckily it turns out such a thing exists. And that thing is called stochastic gradient descent (or SGD). Again, we’ll look at exactly how it works, we’ll build it ourselves from scratch, but for now we don't have to worry about it. I will tell you this, though, neither SGD nor neural nets are at all mathematically complex. They nearly entirely are addition and multiplication. The trick is it just a lot of them--like billions of them--so many more than we can intuitively grasp. They can do extraordinarily powerful things, but they're not rocket science at all. They are not complex things, and we will see exactly how they work. 
+
+![](assets/dl1_2020/lesson1/32.png)
+
+That's the Arthur Samuel version. Nowadays we don't use quite the same terminology, but we use exactly the same idea. So that function that sits in the middle, we call it an architecture. An architecture is the function that we’re adjusting the weights to get it to do something. That’s the architecture, that’s the functional form of the model. Sometimes people say model to mean architecture, so don't let that confuse you too much. But, really the right word is architecture. We don’t call them weights; we call them parameters. Weights has a specific meaning- it’s quite a particular kind of parameter. The things that come out of the model, the architecture with the parameters, we call them predictions. The predictions are based on two kinds of inputs: independent variables that’s the data, like the pictures of the cats and dogs, and dependent variables also known as labels, which is like the thing saying “this is a cat”, “this is a dog”, “this is a cat”. So, that’s your inputs and the results are predictions. The measure of performance, to use Arthur Samuel's word, is known as the loss. The loss is being calculated from the labels on the predictions and then there's the update back to the parameters. 
+
+![](assets/dl1_2020/lesson1/33.png)
+
+Check the above picture if you forget any terminology, if I say these are the parameters of used for this architecture to create a model- you can go back and remind yourself what they mean. What are the parameters? What are the predictions? What is the loss?  Okay, the loss of some function that measures the performance of the model in such a way that we can update the parameters.  
+
+![](assets/dl1_2020/lesson1/34.png)
+
+It's important to note that deep learning and machine learning are not magic. The model can only be created where you have data showing you examples of the thing that you're trying to learn about. It can only learn to operate on the patterns that you've seen in the input used to train it. If we don’t have any line drawings of cats and dogs, then there’s never going to be an update to the parameters that makes the architecture and so the architecture and the parameters together is the model. The model cannot become better at predicting line drawings of cats and dogs because they just, they never received those weight updates because they never received those inputs. Notice also that this learning approach only ever creates predictions. It doesn't tell you what to do about it. 
+
+That’s going to be very important when we think about things like a recommendation system of like “what product do we recommend to somebody”? Well, I don't know- we don't do that, right? We can predict what somebody will say about a product we’ve shown them, but we're not creating actions. We’re creating predictions. That’s a super important difference to recognize. It’s not enough just to have examples of input data like pictures of dogs and cats. We can't do anything without labels. And so very often, organizations say: “we don't have enough data”. Most of the time they mean: “we don't have enough labelled data”. Because if a company is trying to do something with deep learning, often it’s because they're trying to automate or improve something they’re already doing Which means by definition they have data about that thing or a way to capture data about that thing. Cus they’re doing it. But often the tricky part is labelling it. So for example in medicine, if you're trying to build a model for radiology. You can almost certainly get lots of medical images about just about anything you can think of. But it might be very hard to label them according to malignancy of a tumour or according to whether or not Meningioma is present or whatever, because these kinds of labels are not necessarily captured in a structured way, at least in the US medical system. So that’s an important distinction that really impacts your kind of strategy. 
+
+![](assets/dl1_2020/lesson1/35.png)
+
+Then a model, as we saw from the PDP (Parallel Distributed Processing) book, in an environment. You roll it out and you do something with it. This piece of PDP framework is super important. You have a model that’s actually doing something. For example, you’ve built a predictive policing model that predicts (doesn't recommend actions) it predicts where an arrest might be made. This is something a lot of jurisdictions in the US are using. Now it’s predicting that, based on data and based on labelled data. And in this case it's actually gonna be using (in the US) for example data where, I think, depending on whether you're black or white, black people in the US, I think, get arrested something like seven times more often for say marijuana possession than whites. Even though the actual underlying amount of marijuana use is about the same in the two populations. So if you start with biased data and you build a predictive policing model it's prediction will say: “oh you will find somebody you can arrest here” based on some biased data. So then, law enforcement officers might decide to focus their police activity on the areas where those predictions are happening. As a result of which they’ll find more people to arrest. And then they’ll use that, to put it back into the model. Which will now find: “oh there’s even more people we should be arresting in the black neighbourhoods” and thus it continues. So this would be an example of how a model interacting with its environment creates something called a **positive feedback loop**. *Where the more a model is used, the more biased the data becomes, making the model even more biased and so forth*. So one of the things to be super careful about with machine learning is; recognizing how that model is actually being used and what kinds of things might happen as a result of that.
+
+This is an example of **proxies** because here arrest is being used as a proxy for crime, and I think that pretty much in all cases, the data that you actually have is a proxy for some value that you truly care about. And that difference between the proxy and the actual value often ends up being significant.
+
+## Understanding the underlying code [[1:04:13](https://youtu.be/_QUEXsHfsA0?t=3853)]
+
+```python
+from fastai2.vision.all import *
+path = untar_data(URLs.PETS)/'images'
+
+def is_cat(x): return x[0].isupper()
+dls = ImageDataLoaders.from_name_func(
+    path, get_image_files(path), valid_pct=0.2, seed=42,
+    label_func=is_cat, item_tfms=Resize(224))
+
+learn = cnn_learner(dls, resnet34, metrics=error_rate)
+learn.fine_tune(1)
+```
+
+It is 6 lines of code.
+
+**Line 1** (`from fastai2.vision.all import *`) is an import line. So in Python you can’t use an external library until you import from it. Normally in python people import just the functions and classes that they need from the library. But Python does provide a convenient facility where you can import everything from a module, which is by putting a start (`*`) there.  Most of the time, this is a bad idea. Because, by default, the way Python works is that if you say import star, it doesn't only import the things that are interesting and important in the library you're trying to get something from but it also imports things from all the libraries it used, and all the libraries they used, and you end up exploding your namespace in horrible ways and causing all kinds of bugs.
+    
+Because fastai is designed to be used in this REPL environment where you want to be able to do a lot of quick rapid prototyping, we actually spent a lot of time figuring out how to avoid that problem so that you can import star safely. So, whether you do this or not, is entirely up to you. But rest assured that if you import star from a fastai library, it's actually been explicitly designed in a way that you only get the bits that you actually need. One thing to mention is in the video you see it’s called “fastai2.” That’s because we’re recording this video using a prerelease version. By the time you are watching the online, the MOOC version of this, the 2 will be gone.  
+
+Something else to mention is, there are, as I speak, four main predefined applications in fastai, being vision, text, tabular and collaborative filtering.  We’ll be learning about all of them and a lot more. For each one, say here’s vision, you can import from the `.all`, kind of meta-model and that will give you all the stuff that you need for most common vision applications.  
+
+So, if you’re using a REPL system like jupyter notebook, it’s going to give you all the stuff right there that you need without having to go back and figure it out. One of the issues with this is a lot of the python users don’t like this because if they look at something like `untar_data` they would figure out where it comes from by looking at the import line. And so if you import star, you can’t do that anymore. The good news, in a REPL, you don’t have to. You can literally just type the symbol, press <kbd>Shift</kbd>+<kbd>Enter</kbd> and it will tell you exactly where it came from.
+
+![](assets/dl1_2020/lesson1/36.png)
+
+**Line 2** (`path = untar_data(URLs.PETS)/'images'`) will download a dataset, decompress it, and put it on your computer. If it is already downloaded, it won’t download it again. If it is already decompressed it won’t decompress it again. So `untar_data` returns the path that is whereabouts it has been decompressed to. Or if it is already decompressed, it tells us where it was previously decompressed to.
+    
+And as you can see, fastai already has predefined access to a number of really useful [datasets](https://course.fast.ai/datasets), such as this PETS dataset. Datasets are a super important part, as you can imagine of deep learning. We will be seeing lots of them. And these are created by lots of heroes who basically spend months or years collecting data that we can use to build these models.
+
+**Line 3-4** (`dls = ImageDataLoaders.from_name_func(...)`): So in this case, for example, to do the actual building of the dataset, we called `ImageDataLoaders.from_name_func()`. I can actually call the special doc function to get the documentation for that by typing `doc(ImageDataLoaders.from_name_func)` and pressing <kbd>Shift</kbd>+<kbd>Enter</kbd>.
+
+![](assets/dl1_2020/lesson1/37.png)
+
+As you can see, it tells me exactly everything to pass in, what all the defaults are, and most importantly, not only what it does, but `Show in docs` pops me over to the full documentation including an example. 
+
+![](assets/dl1_2020/lesson1/38.png)
+
+Everything in the fastai documentation has an example and the cool thing is the entire documentation is written in Jupyter Notebooks. So that means you can actually open the Jupyter Notebook for this documentation and run the line of code yourself and see it actually working and look at the outputs and so forth. 
+    
+Also in the documentation, you'll find that there are a bunch of tutorials. For example, if you look at the vision tutorial, it will cover lots of things but one of the things we will cover is, as you can see in this case, pretty much the same kind of stuff we are actually looking at in Lesson 1. So there is a lot of documentation in fastai and taking advantage of it is a pretty good idea. It is fully searchable and as I mentioned, perhaps most importantly, every one of these documentation pages is also a fully interactive Jupyter Notebook. 
+    
+The next step is to tell fastai what this data is and we will be learning a lot about that. But in this case, we are basically saying, ‘okay, it contains images’. It contains images that are in this path. We have to tell it things like ‘okay, what images are actually in that path’. One of the really interesting ones is `label_func`. How do you tell, for each file, whether it is a cat or a dog. And if you actually look at the README for the original dataset, it uses a slightly quirky thing which is they said, ‘oh, anything where the first letter of the filename is an uppercase is a cat’. That’s what they decided. 
+
+So we just created a little function here called `is_cat` (`def is_cat(x): return x[0].isupper()`) that returns the first letter, is it uppercase or not.  And we tell fastai that’s how you tell if it’s a cat. now we’ve told it what the data is.
+
+**Line 5** (`learn = cnn_learner(dls, resnet34, metrics=error_rate)`): We then have to create something called a learner. A learner is a thing that learns, it does the training. So you have to tell it what data to use (using `dls`). Then you have to tell it what architecture to use (using `resnet34`).  I’ll be talking a lot about this in the course. But, basically, there’s a lot of predefined neural network architectures that have certain pros and cons and for computer vision, the architecture is called ResNet.  Just a super great starting point, and so we’re just going to use a reasonably small one of them. So these are all predefined and set up for you. And then you can tell fastai what things you want to print out as it’s training (using `metrics=error_rate`) and in this case, we are print the error (on validation data only) as we train.  
+
+**Line 6** (`learn.fine_tune(1)`): So then we can call this really important method called `fine_tune` that we’ll be learning about in the next lesson which actually does the training.  
+
+`valid_pct` does something very important. It grabs, in this case 20% of the data (.2 proportion), and does not use it for training a model. Instead, it uses it for telling you the error rate of the model. So, always in fastai this metric, `error_rate` will always be calculated on a part of the data which has not been trained with and the idea here, and we’ll talk a lot about more about this in future lessons. But the basic idea here is we want to make sure that we’re not overfitting.  
+
+## Overfitting [[1:12:30](https://youtu.be/_QUEXsHfsA0?t=4350)]
+
+
+![](assets/dl1_2020/lesson1/39.png)
+
+Let me explain. Overfitting looks like the graph on the right. Let’s say you’re trying to create a function that fits all these dots. A nice function would look like something as the left. But you can fit it much more precisely with the function used in the right. The right function is closer to all the dots than the left one. So, this is obviously a better function except as soon as you get outside where the dots are, especially if you go off the edges, it obviously doesn’t make any sense. So this is what you’d call an overfit function. 
+
+Overfitting happens for all kinds of reasons. We use a model that’s too big or we use not enough data. We’ll be talking all about it but really the craft of deep learning is all about creating a model that has a proper fit and the only way you know if a model has a proper fit is by seeing whether it works well on data that was not used to train it. And so, we always set aside some of the data to create something called a **validation set**.  *The validation set is the data that we do not touch  at all when we’re training a model, but we’re only using it to figure out whether the model’s actually working or not.*  
+
+![](assets/dl1_2020/lesson1/40.png)
+
+One thing that Sylvain mentioned in the book, is that one of the interesting things about studying fastai is you learn a lot of interesting programming practices. I've been programming since I was a kid, so like 40 years and Sylvain and I both work really, really hard to make python do a lot of work for us and to use programming practices which make us very productive and allow us to come back to our code, years later and still understand it. And so you'll see in our code we’ll often do things that you might not have seen before. A lot of students who have gone through previous courses say they learned a lot about coding and python coding and software engineering from the course.  So, yeah check, when you see something new, check it out and feel free to ask on the forums if you’re curious about why something was done that way.  
+
+One thing to mention is, just like I mentioned import star is something most Python programmers don't do cause most libraries don’t support doing it properly, we do a lot of things like that. We do a lot of things where we don't follow a traditional approach to python programming. Because I've used so many languages over the years, I code not in a way that's specifically pythonic but incorporate ideas from lots of other languages and lots of other notations, and heavily customized our approach to python programming based on what works well for data science. That means that the code you see in fastai is not probably the kind of style guides and normal approaches at your workplace, if you use Python there. So, obviously, you should make sure that you fit in with your organization's programming practices rather than following ours. But perhaps in your own hobby work, you can follow ours and see if you find that are interesting and helpful, or even experiment with that in your company if you're a manager and you are interested in doing so.  
+
+## Other applications of Deep Learning with code [[1:16:08](https://youtu.be/_QUEXsHfsA0?t=4568)]
+
+### 1. Image Segmentation
+
+```python
+path = untar_data(URLs.CAMVID_TINY)
+dls = SegmentationDataLoaders.from_label_func(
+    path, bs=8, fnames = get_image_files(path/"images"),
+    label_func = lambda o: path/'labels'/f'{o.stem}_P{o.suffix}',
+    codes = np.loadtxt(path/'codes.txt', dtype=str)
+)
+
+learn = unet_learner(dls, resnet34)
+learn.fine_tune(8)
+```
+Have a look at the above code. Almost the same code, and this has built a model that does something totally different!  
+
+![](assets/dl1_2020/lesson1/41.png)
+
+It’s something which has taken images. This is on the left, is the labeled data. It’s got images with color codes to tell you whether it's a car, or a tree, or a building, or a sky, or a line marking or a road. And on the right is our model's output, and our model has successfully figured out for each pixel, is that a car, line marking, a road. Now it’s only done it in, under 20 seconds so it's a very small quick model. It's made some mistakes -- like it's missing this line marking, and some of these cars it thinks is house. But you can see so if you train this for a few minutes, it's nearly perfect. But you can see the basic idea is that we can very rapidly with almost exactly the same code, create something not that classifies cats and dogs but does what’s called segmentation: figures out what every pixel in image is.  
+
+### 2. Text Classification
+
+```python
+from fastai2.text.all import *
+path = untar_data(URLs.IMDB)
+dls = TextDataLoaders.from_folder(path, valid='test')
+
+learn = text_classifier_learner(dls, AWD_LSTM, drop_mult=0.5, metrics=accuracy)
+learn.fine_tune(4, 1e-2)
+```
+This is now something where we can give it a sentence and it can figure out whether that is expressing a positive or negative sentiment, and this is actually giving a 93% accuracy on the task in about 15 minutes on the IMDB dataset, which contains thousands of full-length movie reviews (in fact, 1000- to 3000-word reviews). 
+
+![](assets/dl1_2020/lesson1/42.png)
+
+This number here that we got with the same three lines of code would have been the best in the world for this task in a very, very, very popular academics dataset in like 2015 I think. So we are creating world-class models, in our browser, using the same basic code. 
+
+### 3. Tabular data
+
+```python
+from fastai2.tabular.all import *
+path = untar_data(URLs.ADULT_SAMPLE)
+
+dls = TabularDataLoaders.from_csv(path/'adult.csv', path, y_names="salary",
+    cat_names = ['workclass', 'education', 'marital-status', 'occupation',
+                 'relationship', 'race'],
+    cont_names = ['age', 'fnlwgt', 'education-num'],
+    procs = [Categorify, FillMissing, Normalize])
+
+learn = tabular_learner(dls, metrics=accuracy)
+learn.fit_one_cycle(3)
+```
+
+This is now building a model that is predicting salary based on a csv table containing these columns. So this is tabular data. 
+
+### 4. Collaborative Filtering
+
+```python
+from fastai2.collab import *
+path = untar_data(URLs.ML_SAMPLE)
+dls = CollabDataLoaders.from_csv(path/'ratings.csv')
+
+learn = collab_learner(dls, y_range=(0.5,5.5))
+learn.fine_tune(10)
+```
+This is now building something which predicts, for each combination of a user and a movie, what rating do we think that user will give that movie, based on what other movies they’ve watched and liked in the past. This is called collaborative filtering and is used in recommendation systems. 
+
+So here you’ve seen some examples of each of the four applications in fastai. And as you'll see throughout this course, the same basic code and also the same basic mathematical and software engineering concepts allow us to do vastly different things using the same basic approach. And the reason why, is because of Arthur Samuel. Because of this basic description of what it is you can do if only you have a way to parameterize a model and you have an update procedure which can update the weights to make you better at your loss function, and in this case we can use neural networks, which are totally flexible functions. 
+
+[[1:20:13](https://youtu.be/_QUEXsHfsA0?t=4813)]
+
+So that's it for this first lesson. It’s a little bit shorter than our other lessons going to be and the reason for that is that we are as I mentioned at the start of a global pandemic here, or at least in the West (in other countries they are much further into it). So we spent some time talking about that at the start of the course and you can find that video [here](https://www.youtube.com/watch?v=GZ0yNMnvwqY). 
+
+So in the future lessons there will be more on deep learning. So, what I suggest you do over the next week, before you work on the next lesson, is just make sure that you can spin up a GPU server, you can shut down when it's finished and that you can run all of the code here and, as you go through, see if this is using Python in a way you recognise, use the documentation, use that doc function, do some search on the fastai doc, see what it does, see if you can actually grab the fastai documentation notebooks themselves and run them. Just try to get comfortable, that you can if you can know your way around. Because the most important thing to do with this style of learning, this top-down learning, is to be able to run experiments and that means you need to be able to run code.
+
+So my recommendation is: don't move on until you can run the code, read the chapter of the book, and then go through the questionnaire. We still got some more work to do about validation sets and test sets and transfer learning. So you won’t be able to do all of it yet but try to to all the parts you can, based on what we've seen of the course so far. 
+
+Okay, so thanks very much for joining us for lesson one everybody and are really looking forward to seeing you next time where we will learn about transfer learning and then we will move on to creating an actual production version of an application that we can actually put out on the Internet and you can start building apps that you can show your friends and they can start playing with.
