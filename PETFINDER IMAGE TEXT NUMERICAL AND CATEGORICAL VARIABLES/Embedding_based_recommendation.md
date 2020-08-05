@@ -30,11 +30,11 @@ The importance of getting these embeddings is that through these vectors we can 
 We now have two sets of embeddings where the corresponding dimensions represent the same features. To understand how much a candidate will be suitable for a given job, we simply need to quantify similarity between their embeddings.
 One approach is to compute their dot product. Recall that given two n-dimensional vectors, a and b, where:
 
-![User A and B Embeddings](docs/images/users_a_b.png)
+![User A and B Embeddings](PETFINDER IMAGE TEXT NUMERICAL AND CATEGORICAL VARIABLES/users_a_b.png)
  
 their dot product is defined as:
 
-![A and B Dot Product](docs/images/dot_product.png)
+![A and B Dot Product](PETFINDER IMAGE TEXT NUMERICAL AND CATEGORICAL VARIABLES/dot_product.png)
  
 Intuitively, the higher the values for the corresponding features, the higher the likelihood that the candidate will be suitable for that job.
  
@@ -44,7 +44,7 @@ Intuitively, the higher the values for the corresponding features, the higher th
 Measuring Similarity with Cosine Similarity
 Also when we want to compute for the similar jobs/ similar candidates, it is done by using Cosine Similarities 
 
-![Cosine Similarity](docs/images/cosine_similarity.png)
+![Cosine Similarity](PETFINDER IMAGE TEXT NUMERICAL AND CATEGORICAL VARIABLES/cosine_similarity.png)
                               
 This returns a score between 0 and 1, the more the similar the two documents the higher the score we will get.
 
